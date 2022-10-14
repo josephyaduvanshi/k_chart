@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart' show Color;
 
 class ChartColors {
-  List<Color> bgColor = [Color(0xff18191d), Color(0xff18191d)];
+  List<Color> bgColor = [
+    Color.fromARGB(255, 24, 33, 49),
+    Color.fromARGB(255, 24, 33, 49)
+  ];
 
   Color kLineColor = Color(0xff4C86CD);
   Color lineFillColor = Color(0x554C86CD);

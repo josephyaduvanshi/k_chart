@@ -24,21 +24,61 @@ class KLineEntity extends KEntity {
   });
 
   KLineEntity.fromJson(Map<String, dynamic> json) {
-    open = json['open']?.toDouble() ?? 0;
-    high = json['high']?.toDouble() ?? 0;
-    low = json['low']?.toDouble() ?? 0;
-    close = json['close']?.toDouble() ?? 0;
-    vol = json['vol']?.toDouble() ?? 0;
-    amount = json['amount']?.toDouble();
-    int? tempTime = json['time']?.toInt();
-    //兼容火币数据
-    if (tempTime == null) {
-      tempTime = json['id']?.toInt() ?? 0;
-      tempTime = tempTime! * 1000;
-    }
-    time = tempTime;
-    ratio = json['ratio']?.toDouble();
-    change = json['change']?.toDouble();
+    open = double.parse(json['open'].toString() == "null"
+            ? "${double.parse("${double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble().isNegative ? double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble() : double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble()}")}"
+            : json['open'].toString().isEmpty
+                ? "${double.parse("${double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble().isNegative ? double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble() : double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble()}")}"
+                : json['open'].toString())
+        .toDouble();
+    high = double.parse(json['high'].toString() == "null"
+            ? "0"
+            : json['high'].toString().isEmpty
+                ? "0"
+                : json['high'].toString())
+        .toDouble();
+    low = double.parse(json['low'].toString() == "null"
+            ? "0"
+            : json['low'].toString().isEmpty
+                ? "0"
+                : json['low'].toString())
+        .toDouble();
+    close = double.parse(json['close'].toString() == "null"
+            ? "0"
+            : json['close'].toString().isEmpty
+                ? "0"
+                : json['close'].toString())
+        .toDouble();
+    vol = double.parse(json['vol'].toString() == "null"
+            ? "0"
+            : json['vol'].toString().isEmpty
+                ? "0"
+                : json['vol'].toString())
+        .toDouble();
+    amount = double.parse(json['amount'].toString() == "null"
+            ? "0"
+            : json['amount'].toString().isEmpty
+                ? "0"
+                : json['amount'].toString())
+        .toDouble();
+    // int? tempTime = json['time']?.toInt();
+    // //兼容火币数据
+    // if (tempTime == null) {
+    //   tempTime = json['id']?.toInt() ?? 0;
+    //   tempTime = tempTime! * 1000;
+    // }
+    time = DateTime.parse(json['id']).millisecondsSinceEpoch;
+    ratio = double.parse(json['ratio'].toString() == "null"
+            ? "0"
+            : json['ratio'].toString().isEmpty
+                ? "0"
+                : json['ratio'].toString())
+        .toDouble();
+    change = double.parse(json['change'].toString() == "null"
+            ? "0"
+            : json['change'].toString().isEmpty
+                ? "0"
+                : json['change'].toString())
+        .toDouble();
   }
 
   Map<String, dynamic> toJson() {
