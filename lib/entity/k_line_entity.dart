@@ -25,36 +25,11 @@ class KLineEntity extends KEntity {
 
   KLineEntity.fromJson(Map<String, dynamic> json) {
     open = json['open'] ?? 0.0;
-    high = double.parse(json['high'].toString() == "null"
-            ? "0"
-            : json['high'].toString().isEmpty
-                ? "0"
-                : json['high'].toString())
-        .toDouble();
-    low = double.parse(json['low'].toString() == "null"
-            ? "0"
-            : json['low'].toString().isEmpty
-                ? "0"
-                : json['low'].toString())
-        .toDouble();
-    close = double.parse(json['close'].toString() == "null"
-            ? "0"
-            : json['close'].toString().isEmpty
-                ? "0"
-                : json['close'].toString())
-        .toDouble();
-    vol = double.parse(json['vol'].toString() == "null"
-            ? "0"
-            : json['vol'].toString().isEmpty
-                ? "0"
-                : json['vol'].toString())
-        .toDouble();
-    amount = double.parse(json['amount'].toString() == "null"
-            ? "0"
-            : json['amount'].toString().isEmpty
-                ? "0"
-                : json['amount'].toString())
-        .toDouble();
+    high = json['high'] ?? 0.0;
+    low = json['low'] ?? 0.0;
+    close = json['close'] ?? 0.0;
+    vol = json['vol'] ?? 0.0;
+    amount = json['amount'] ?? 0.0;
     // int? tempTime = json['time']?.toInt();
     // //兼容火币数据
     // if (tempTime == null) {
@@ -62,24 +37,8 @@ class KLineEntity extends KEntity {
     //   tempTime = tempTime! * 1000;
     // }
     time = DateTime.parse(json['date']).millisecondsSinceEpoch;
-    ratio = double.parse(json['high'].toString() == "null"
-            ? "0"
-            : json['ratio'].toString().isEmpty
-                ? "0"
-                : json['ratio'].toString())
-        .toDouble();
-    change = double.parse(json['open'].toString() == "null"
-                ? "0"
-                : json['open'].toString().isEmpty
-                    ? "0"
-                    : json['open'].toString())
-            .toDouble() -
-        double.parse(json['close'].toString() == "null"
-                ? "0"
-                : json['close'].toString().isEmpty
-                    ? "0"
-                    : json['close'].toString())
-            .toDouble();
+    ratio = (json['close'] - json['open']) / json['open'];
+    change = json['close'] - json['open'];
   }
 
   Map<String, dynamic> toJson() {
