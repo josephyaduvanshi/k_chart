@@ -1,3 +1,6 @@
+## [0.7.1]
+* UPDATED AS PER REQUIRED FOR PROJECT
+
 ## [0.1.1]
 
 * NEW: Initial Release.

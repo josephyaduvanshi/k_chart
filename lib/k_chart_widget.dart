@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:k_chart/chart_translations.dart';
-import 'package:k_chart/extension/map_ext.dart';
-import 'package:k_chart/flutter_k_chart.dart';
+import 'package:k_chart_forked/chart_translations.dart';
+import 'package:k_chart_forked/extension/map_ext.dart';
+import 'package:k_chart_forked/flutter_k_chart.dart';
 
 enum MainState { MA, BOLL, NONE }
 

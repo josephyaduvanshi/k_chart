@@ -24,12 +24,7 @@ class KLineEntity extends KEntity {
   });
 
   KLineEntity.fromJson(Map<String, dynamic> json) {
-    open = double.parse(json['open'].toString() == "null"
-            ? "${double.parse("${double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble().isNegative ? double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble() : double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble()}")}"
-            : json['open'].toString().isEmpty
-                ? "${double.parse("${double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble().isNegative ? double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble() : double.parse(json['close'].toString() == "null" ? "0" : json['close'].toString().isEmpty ? "0" : json['close'].toString()) - double.parse(json['change'].toString() == "null" ? "0" : json['change'].toString().isEmpty ? "0" : json['change'].toString()).toDouble()}")}"
-                : json['open'].toString())
-        .toDouble();
+    open = json['open'] ?? 0.0;
     high = double.parse(json['high'].toString() == "null"
             ? "0"
             : json['high'].toString().isEmpty
@@ -66,19 +61,25 @@ class KLineEntity extends KEntity {
     //   tempTime = json['id']?.toInt() ?? 0;
     //   tempTime = tempTime! * 1000;
     // }
-    time = DateTime.parse(json['id']).millisecondsSinceEpoch;
-    ratio = double.parse(json['ratio'].toString() == "null"
+    time = DateTime.parse(json['date']).millisecondsSinceEpoch;
+    ratio = double.parse(json['high'].toString() == "null"
             ? "0"
             : json['ratio'].toString().isEmpty
                 ? "0"
                 : json['ratio'].toString())
         .toDouble();
-    change = double.parse(json['change'].toString() == "null"
-            ? "0"
-            : json['change'].toString().isEmpty
+    change = double.parse(json['open'].toString() == "null"
                 ? "0"
-                : json['change'].toString())
-        .toDouble();
+                : json['open'].toString().isEmpty
+                    ? "0"
+                    : json['open'].toString())
+            .toDouble() -
+        double.parse(json['close'].toString() == "null"
+                ? "0"
+                : json['close'].toString().isEmpty
+                    ? "0"
+                    : json['close'].toString())
+            .toDouble();
   }
 
   Map<String, dynamic> toJson() {
